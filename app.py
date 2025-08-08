@@ -1,12 +1,14 @@
 import streamlit as st
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 import torch
+import os
 
 # Load model & tokenizer
 @st.cache_resource
 def load_model():
-    model = DistilBertForSequenceClassification.from_pretrained("./distilbert_femicide_model")
-    tokenizer = DistilBertTokenizer.from_pretrained("./distilbert_femicide_model")
+   MODEL_DIR = os.path.join(os.getcwd(), "distilbert_femicide_model")
+model = DistilBertForSequenceClassification.from_pretrained(MODEL_DIR)
+tokenizer = DistilBertTokenizer.from_pretrained(MODEL_DIR)
     return model, tokenizer
 
 model, tokenizer = load_model()
